@@ -22,7 +22,9 @@ These mods require SMAPI and Content Patcher to work properly.
 
 Here's more infomation on how to install [SMAPI](https://stardewvalleywiki.com/Modding:Player_Guide/Getting_Started) and [Content Patcher](https://www.nexusmods.com/stardewvalley/mods/1915).
 
-Unpack the zip file, move the "[CP] Late Nites" and "Late Nites" folders into the Mods section of the game directory (or use any Stardew Valley mod manager)
+Download the latest release of this mod [here](https://github.com/montgomerysamantha/LateNites/releases/).
+
+Unpack the zip file, move the "[CP] Late Nites" and "Late Nites" folders into the Mods section of the game directory (or use any Stardew Valley mod manager).
 
 Launch the game with SMAPI as usual. 
 
