@@ -1,0 +1,11 @@
+{
+  "Name": "Late Nites Hours",
+  "Author": "Samantha",
+  "Version": "0.1",
+  "Description": "A content patch that makes stores open late babey (6:00 AM to 12:00 AM).",
+  "UniqueID": "Samantha.LNS",
+  "UpdateKeys": [],
+  "ContentPackFor": {
+    "UniqueID": "Pathoschild.ContentPatcher"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "Name": "LateNites",
+  "Author": "Samantha",
+  "Version": "1.0.0",
+  "Description": "A mod that makes shops self-serve and open late babey (6:00 AM to 12:00 AM).",
+  "UniqueID": "Samantha.LateNites",
+  "EntryDll": "LateNites.dll",
+  "MinimumApiVersion": "3.13.0",
+  "UpdateKeys": []
+}
