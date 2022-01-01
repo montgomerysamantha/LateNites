@@ -1,5 +1,7 @@
 # Late Nites - A Stardew Valley mod
 
+![Late Nites](/latenites.png)
+
 Do you often find yourself short on time? Taking dirt naps at 2:00 AM every night in the mines? 
 Ever wish there was a self-checkout at Pierre's avaliable after dark or at the crack of dawn? Well then this
 is the Stardew mod for you!
