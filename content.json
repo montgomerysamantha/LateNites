@@ -11,7 +11,7 @@
             "Y": 81
           }, //blacksmith
           "Layer": "Buildings",
-          "SetProperties": { "Action": "LockedDoorWarp 5 19 Blacksmith 600 2400" }
+          "SetProperties": { "Action": "LockedDoorWarp 5 19 Blacksmith 600 2600" }
         },
         {
           "Position": {
@@ -19,7 +19,7 @@
             "Y": 56
           }, //seedshop
           "Layer": "Buildings",
-          "SetProperties": { "Action": "LockedDoorWarp 6 29 SeedShop 600 2400" }
+          "SetProperties": { "Action": "LockedDoorWarp 6 29 SeedShop 600 2600" }
         },
         {
           "Position": {
@@ -27,7 +27,29 @@
             "Y": 56
           }, //seedshop
           "Layer": "Buildings",
-          "SetProperties": { "Action": "LockedDoorWarp 6 29 SeedShop 600 2400" }
+          "SetProperties": { "Action": "LockedDoorWarp 6 29 SeedShop 600 2600" }
+        },
+        {
+          "Position": {
+            "X": 43,
+            "Y": 56
+          }, //seedshop
+          "Layer": "Buildings",
+          "SetProperties": { "Action": "LockedDoorWarp 6 29 SeedShop 600 2600" },
+          "When": {
+            "DayOfWeek":  "Wednesday"
+          }
+        },
+        {
+          "Position": {
+            "X": 44,
+            "Y": 56
+          }, //seedshop
+          "Layer": "Buildings",
+          "SetProperties": { "Action": "LockedDoorWarp 6 29 SeedShop 600 2600" },
+          "When": {
+            "DayOfWeek": "Wednesday"
+          }
         },
         {
           "Position": {
@@ -35,7 +57,7 @@
             "Y": 55
           }, //hospital
           "Layer": "Buildings",
-          "SetProperties": { "Action": "LockedDoorWarp 10 19 Hospital 600 2400" }
+          "SetProperties": { "Action": "LockedDoorWarp 10 19 Hospital 600 2600" }
         }
       ]
     },
@@ -49,7 +71,7 @@
             "Y": 15
           }, //marnieshop
           "Layer": "Buildings",
-          "SetProperties": { "Action": "LockedDoorWarp 13 19 AnimalShop 600 2400" }
+          "SetProperties": { "Action": "LockedDoorWarp 13 19 AnimalShop 600 2600" }
         }
       ]
     },
@@ -63,7 +85,7 @@
             "Y": 25
           }, //robinshop
           "Layer": "Buildings",
-          "SetProperties": { "Action": "LockedDoorWarp 6 24 ScienceHouse 600 2400" }
+          "SetProperties": { "Action": "LockedDoorWarp 6 24 ScienceHouse 600 2600" }
         },
         {
           "Position": {
@@ -71,7 +93,7 @@
             "Y": 8
           }, //guild
           "Layer": "Buildings",
-          "SetProperties": { "Action": "LockedDoorWarp 6 19 AdventureGuild 600 2400" }
+          "SetProperties": { "Action": "LockedDoorWarp 6 19 AdventureGuild 600 2600" }
         }
       ]
     },

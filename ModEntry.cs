@@ -27,6 +27,7 @@ namespace LateNites
             helper.Events.Input.ButtonPressed += OnButtonPressed;
             helper.Events.GameLoop.SaveLoaded += OnLoad;
             helper.Events.GameLoop.ReturnedToTitle += this.OnExit;
+            helper.Events.Input.ButtonPressed += this.OnDoorClick;
 
             i18n = helper.Translation;
         }
@@ -91,6 +92,34 @@ namespace LateNites
 
             if (this.setupFinished)
                 this.IsMenuOpened(e.Button.IsActionButton());
+        }
+
+        private void OnDoorClick(object sender, ButtonPressedEventArgs e)
+        {
+            // ignore if player hasn't loaded a save yet
+            if (!Context.IsWorldReady)
+                return;
+
+            String locationString = Game1.player.currentLocation.Name;
+            Vector2 playerPosition = Game1.player.getTileLocation();
+
+            //Monitor.Log($"The location is {locationString}", LogLevel.Info);
+            //Monitor.Log($"The tile location is {playerPosition}", LogLevel.Info);
+            Vector2 door1 = new Vector2(43, 57);
+            Vector2 door2 = new Vector2(44, 57);
+           
+            if (locationString.Equals("Town") && (playerPosition.Equals(door1) || playerPosition.Equals(door2)))
+            {
+                if (Game1.shortDayNameFromDayOfSeason(Game1.dayOfMonth).Equals("Wed") && e.Button.IsActionButton())
+                {
+                    Monitor.Log($"We are at the seed shop door on weds and button is clicked", LogLevel.Info);
+                    Monitor.Log($"Warping farmer...", LogLevel.Info);
+                    Rumble.rumble(0.15f, 200f);
+                    Game1.player.completelyStopAnimatingOrDoingAction();
+                    Game1.playSound("doorClose");
+                    Game1.warpFarmer("SeedShop", 6, 29, false);
+                }
+            }
         }
 
         private bool IsMenuOpened(bool isActionKey)
