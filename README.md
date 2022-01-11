@@ -7,9 +7,10 @@ Ever wish there was a self-checkout at Pierre's avaliable after dark or at the c
 is the Stardew mod for you!
 Now you can buy stuff without someone at the counter and extend store hours to 6:00 AM to 2:00 AM!
 
-    Pierre's
-    Marnie's Animal shop
     Carpenter Robin's shop
+    Marnie's Animal shop
+    Gunther's Museum
+    Pierre's shop
     Willy's Fish shop (still working on extended store hours, but self-serve counter should work)
 
 
@@ -33,7 +34,7 @@ Launch the game with SMAPI as usual.
 
 ## Background and Information
 
-Avaliable in English, French, and Korean currently.
+Avaliable in English, French, and Korean currently (please contact me if you want to add more!).
 
 I created this mod as a tool for myself since I often was frustrated by stores closing early and Marnie always seems to be gone from her shop. :(
 With this, she can go hang out with Mayor Lewis all the time lol.
@@ -50,6 +51,9 @@ Potential Future Features:
 - Config file for buildings to be locked/unlocked
 - Unlock ALL doors, regardless of heart levels
 - Keep doors unlocked on special event days (Flower dance, Halloween, Winter Festival, and others)
+
+## Recent Updates
+- Museum now unlocks at 6:00AM, can donate artifacts and collect rewards as needed
 
 ## Bugs
 
