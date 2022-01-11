@@ -18,11 +18,12 @@ namespace LateNites
         private List<Vector2> fishShopShopCounterTiles;
         private List<Vector2> museumCounterTiles;
         private Dictionary<String, NPC> npcRefs;
+        private Dictionary<String, Vector2> doorLocations;
 
         private ITranslationHelper i18n;
 
         private bool setupFinished = false;
-        private bool debugMode = true;
+        private bool debugMode = false;
 
         public override void Entry(IModHelper helper)
         {
@@ -73,6 +74,9 @@ namespace LateNites
             museumCounterTiles.Add(new Vector2(3f, 10f));
             museumCounterTiles.Add(new Vector2(3f, 9f));
 
+            // setup special case doors
+            InitializeDoorLocations();
+
             foreach (NPC npc in Utility.getAllCharacters())
             {
                 switch (npc.Name)
@@ -89,12 +93,19 @@ namespace LateNites
 
             foreach (var item in npcRefs)
             {
-                this.Monitor.Log(item.ToString());
+                Monitor.Log(item.ToString(), LogLevel.Info);
             }
 
             // done
-
             this.setupFinished = true;
+        }
+
+        private void InitializeDoorLocations()
+        {
+            doorLocations = new Dictionary<string, Vector2>();
+
+            doorLocations.Add("seedShopDoor1", new Vector2(43, 57));
+            doorLocations.Add("seedShopDoor2", new Vector2(44, 57));
         }
 
         private void OnExit(object Sender, EventArgs e)
@@ -123,7 +134,22 @@ namespace LateNites
 
             Vector2 door1 = new Vector2(43, 57);
             Vector2 door2 = new Vector2(44, 57);
-           
+
+            if (locationString.Equals("Town") && doorLocations.ContainsValue(playerPosition))
+            {
+                // Pierre's Seed Shop Wednesday Edition
+                if (Game1.shortDayNameFromDayOfSeason(Game1.dayOfMonth).Equals("Wed") && e.Button.IsActionButton())
+                {
+                    Monitor.Log($"We are at the seed shop door on weds and button is clicked", LogLevel.Info);
+                    Monitor.Log($"Warping farmer...", LogLevel.Info);
+                    Rumble.rumble(0.15f, 200f);
+                    Game1.player.completelyStopAnimatingOrDoingAction();
+                    Game1.playSound("doorClose");
+                    Game1.warpFarmer("SeedShop", 6, 29, false);
+                }
+            }
+
+            /*
             if (locationString.Equals("Town") && (playerPosition.Equals(door1) || playerPosition.Equals(door2)))
             {
                 if (Game1.shortDayNameFromDayOfSeason(Game1.dayOfMonth).Equals("Wed") && e.Button.IsActionButton())
@@ -136,6 +162,7 @@ namespace LateNites
                     Game1.warpFarmer("SeedShop", 6, 29, false);
                 }
             }
+            */
         }
 
         // log the current tile location each game tick for debugging purposes
