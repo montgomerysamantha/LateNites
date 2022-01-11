@@ -15,6 +15,14 @@
         },
         {
           "Position": {
+            "X": 101,
+            "Y": 90
+          }, //museum
+          "Layer": "Buildings",
+          "SetProperties": { "Action": "LockedDoorWarp 3 14 ArchaeologyHouse 600 2600" }
+        },
+        {
+          "Position": {
             "X": 43,
             "Y": 56
           }, //seedshop
@@ -37,7 +45,7 @@
           "Layer": "Buildings",
           "SetProperties": { "Action": "LockedDoorWarp 6 29 SeedShop 600 2600" },
           "When": {
-            "DayOfWeek":  "Wednesday"
+            "DayOfWeek": "Wednesday"
           }
         },
         {

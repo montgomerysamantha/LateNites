@@ -16,18 +16,31 @@ namespace LateNites
         private List<Vector2> animalShopCounterTiles;
         private List<Vector2> carpentersShopCounterTiles;
         private List<Vector2> fishShopShopCounterTiles;
+        private List<Vector2> museumCounterTiles;
         private Dictionary<String, NPC> npcRefs;
 
         private ITranslationHelper i18n;
 
         private bool setupFinished = false;
+        private bool debugMode = true;
 
         public override void Entry(IModHelper helper)
         {
+            // event raised each button press to check if a menu should be opened
             helper.Events.Input.ButtonPressed += OnButtonPressed;
+
+            // initialize counter tiles locations and npc dictionary
             helper.Events.GameLoop.SaveLoaded += OnLoad;
             helper.Events.GameLoop.ReturnedToTitle += this.OnExit;
+
+            // event raised each button press to check if a door has been clicked
             helper.Events.Input.ButtonPressed += this.OnDoorClick;
+
+            if (debugMode)
+            {
+                // each tick event, log tile coords
+                helper.Events.GameLoop.OneSecondUpdateTicked += this.LogTileLocation;
+            }
 
             i18n = helper.Translation;
         }
@@ -39,6 +52,7 @@ namespace LateNites
             animalShopCounterTiles = new List<Vector2>();
             carpentersShopCounterTiles = new List<Vector2>();
             fishShopShopCounterTiles = new List<Vector2>();
+            museumCounterTiles = new List<Vector2>();
 
             npcRefs = new Dictionary<string, NPC>();
             setupFinished = false;
@@ -56,6 +70,9 @@ namespace LateNites
             fishShopShopCounterTiles.Add(new Vector2(5f, 6f));
             fishShopShopCounterTiles.Add(new Vector2(6f, 6f));
 
+            museumCounterTiles.Add(new Vector2(3f, 10f));
+            museumCounterTiles.Add(new Vector2(3f, 9f));
+
             foreach (NPC npc in Utility.getAllCharacters())
             {
                 switch (npc.Name)
@@ -64,6 +81,7 @@ namespace LateNites
                     case "Robin":
                     case "Marnie":
                     case "Willy":
+                    case "Gunther":
                         npcRefs[npc.Name] = npc;
                         break;
                 }
@@ -103,8 +121,6 @@ namespace LateNites
             String locationString = Game1.player.currentLocation.Name;
             Vector2 playerPosition = Game1.player.getTileLocation();
 
-            //Monitor.Log($"The location is {locationString}", LogLevel.Info);
-            //Monitor.Log($"The tile location is {playerPosition}", LogLevel.Info);
             Vector2 door1 = new Vector2(43, 57);
             Vector2 door2 = new Vector2(44, 57);
            
@@ -119,6 +135,24 @@ namespace LateNites
                     Game1.playSound("doorClose");
                     Game1.warpFarmer("SeedShop", 6, 29, false);
                 }
+            }
+        }
+
+        // log the current tile location each game tick for debugging purposes
+        // and identifying future unlockable door tiles
+        private void LogTileLocation(object Sender, EventArgs e)
+        {
+            // ignore if player hasn't loaded a save yet
+            if (!Context.IsWorldReady)
+                return;
+
+            if (this.setupFinished)
+            {
+                String locationString = Game1.player.currentLocation.Name;
+                Vector2 playerPosition = Game1.player.getTileLocation();
+
+                Monitor.Log($"Player position is X: {playerPosition.X}, Y: {playerPosition.Y}\n" +
+                            $"Currently located within the {locationString}", LogLevel.Info);
             }
         }
 
@@ -230,6 +264,9 @@ namespace LateNites
                             }
                         );
                         break;
+                    case "ArchaeologyHouse":
+                        Monitor.Log($"Museum support is currently being implemented", LogLevel.Info);
+                        break;
                     default:
                         Monitor.Log($"invalid location: {locationString}", LogLevel.Info);
                         break;
@@ -258,7 +295,10 @@ namespace LateNites
                         result = this.carpentersShopCounterTiles.Contains(playerLocation) && (npcRefs["Robin"].currentLocation.Name != locationString || !npcRefs["Robin"].getTileLocation().Equals(new Vector2(8f, 18f)));
                         break;
                     case "FishShop":
-                        result = this.fishShopShopCounterTiles.Contains(playerLocation) && (npcRefs["Willy"].currentLocation.Name != locationString || npcRefs["Willy"].getTileLocation().Y < 6f);
+                        result = this.fishShopShopCounterTiles.Contains(playerLocation) && (npcRefs["Willy"].currentLocation.Name != locationString || !(npcRefs["Willy"].getTileLocation().Y < 6f));
+                        break;
+                    case "ArchaeologyHouse":
+                        result = this.museumCounterTiles.Contains(playerLocation) && (npcRefs["Gunther"].currentLocation.Name != locationString || !npcRefs["Gunther"].getTileLocation().Equals(new Vector2()));
                         break;
                     default:
                         break;
