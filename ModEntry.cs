@@ -89,10 +89,12 @@ namespace LateNites
                 }
             }
 
-            foreach (var item in npcRefs)
-            {
-                Monitor.Log(item.ToString(), LogLevel.Info);
-            }
+            #if DEBUG
+                foreach (var item in npcRefs)
+                {
+                    Monitor.Log(item.ToString(), LogLevel.Info);
+                }
+            #endif
 
             // done
             this.setupFinished = true;
