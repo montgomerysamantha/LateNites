@@ -8,10 +8,10 @@ is the Stardew mod for you!
 Now you can buy stuff without someone at the counter and extend store hours to 6:00 AM to 2:00 AM!
 
     Carpenter Robin's shop
-    Marnie's Animal shop
+    Marnie's animal shop
     Gunther's Museum
     Pierre's shop
-    Willy's Fish shop (still working on extended store hours, but self-serve counter should work)
+    Willy's fish shop
 
 
 ## Credits
@@ -54,6 +54,7 @@ Potential Future Features:
 
 ## Recent Updates
 - Museum now unlocks at 6:00AM, can donate artifacts and collect rewards as needed
+- Willy's shop now opens at 6:00AM
 
 ## Bugs
 
