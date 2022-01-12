@@ -23,7 +23,6 @@ namespace LateNites
         private ITranslationHelper i18n;
 
         private bool setupFinished = false;
-        private bool debugMode = false;
 
         public override void Entry(IModHelper helper)
         {
@@ -37,11 +36,10 @@ namespace LateNites
             // event raised each button press to check if a door has been clicked
             helper.Events.Input.ButtonPressed += this.OnDoorClick;
 
-            if (debugMode)
-            {
+            #if DEBUG
                 // each tick event, log tile coords
                 helper.Events.GameLoop.OneSecondUpdateTicked += this.LogTileLocation;
-            }
+            #endif
 
             i18n = helper.Translation;
         }

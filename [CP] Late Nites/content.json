@@ -89,11 +89,11 @@
       "MapTiles": [
         {
           "Position": {
-            "X": 12,
-            "Y": 25
-          }, //fishshop (placeholder for implementation)
+            "X": 30,
+            "Y": 33
+          }, //fishshop
           "Layer": "Buildings",
-          "SetProperties": { }
+          "SetProperties": { "Action": "LockedDoorWarp 5 9 FishShop 600 2600" }
         }
       ]
 
