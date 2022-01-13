@@ -120,7 +120,7 @@ namespace LateNites
                 return;
 
             if (this.setupFinished)
-                this.IsMenuOpened(e.Button.IsActionButton());
+                this.IsMenuOpened(IsDoorButton(e.Button));
         }
 
         private void OnDoorClick(object sender, ButtonPressedEventArgs e)
@@ -132,13 +132,10 @@ namespace LateNites
             String locationString = Game1.player.currentLocation.Name;
             Vector2 playerPosition = Game1.player.getTileLocation();
 
-            Vector2 door1 = new Vector2(43, 57);
-            Vector2 door2 = new Vector2(44, 57);
-
             if (locationString.Equals("Town") && doorLocations.ContainsValue(playerPosition))
             {
                 // Pierre's Seed Shop Wednesday Edition
-                if (Game1.shortDayNameFromDayOfSeason(Game1.dayOfMonth).Equals("Wed") && e.Button.IsActionButton())
+                if (Game1.shortDayNameFromDayOfSeason(Game1.dayOfMonth).Equals("Wed") && IsDoorButton(e.Button))
                 {
                     Monitor.Log($"We are at the seed shop door on weds and button is clicked", LogLevel.Info);
                     Monitor.Log($"Warping farmer...", LogLevel.Info);
@@ -147,22 +144,17 @@ namespace LateNites
                     Game1.playSound("doorClose");
                     Game1.warpFarmer("SeedShop", 6, 29, false);
                 }
+            }
+        }
+
+        private bool IsDoorButton(SButton value)
+        {
+            if (value.IsActionButton() || value == SButton.MouseRight)
+            {
+                return true;
             }
 
-            /*
-            if (locationString.Equals("Town") && (playerPosition.Equals(door1) || playerPosition.Equals(door2)))
-            {
-                if (Game1.shortDayNameFromDayOfSeason(Game1.dayOfMonth).Equals("Wed") && e.Button.IsActionButton())
-                {
-                    Monitor.Log($"We are at the seed shop door on weds and button is clicked", LogLevel.Info);
-                    Monitor.Log($"Warping farmer...", LogLevel.Info);
-                    Rumble.rumble(0.15f, 200f);
-                    Game1.player.completelyStopAnimatingOrDoingAction();
-                    Game1.playSound("doorClose");
-                    Game1.warpFarmer("SeedShop", 6, 29, false);
-                }
-            }
-            */
+            return false;
         }
 
         // log the current tile location each game tick for debugging purposes

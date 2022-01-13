@@ -47,7 +47,6 @@ In the future, I would like to add support for Stardew Valley Expanded shops and
 hard to chat with the townsfolk after 8:00 PM. 
 
 Potential Future Features:
-- Add click events for doors, make door entry more robust and less erratic
 - Config file for buildings to be locked/unlocked
 - Unlock ALL doors, regardless of heart levels
 - Keep doors unlocked on special event days (Flower dance, Halloween, Winter Festival, and others)
@@ -55,6 +54,7 @@ Potential Future Features:
 ## Recent Updates
 - Museum now unlocks at 6:00AM, can donate artifacts and collect rewards as needed
 - Willy's shop now opens at 6:00AM
+- Right clicking on door now works to open it
 
 ## Bugs
 
