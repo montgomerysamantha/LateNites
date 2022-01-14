@@ -17,6 +17,7 @@ namespace LateNites
         private List<Vector2> carpentersShopCounterTiles;
         private List<Vector2> fishShopShopCounterTiles;
         private List<Vector2> museumCounterTiles;
+        private List<Vector2> blacksmithCounterTiles;
         private Dictionary<String, NPC> npcRefs;
         private Dictionary<String, Vector2> doorLocations;
 
@@ -38,7 +39,7 @@ namespace LateNites
 
             #if DEBUG
                 // each tick event, log tile coords
-                helper.Events.GameLoop.OneSecondUpdateTicked += this.LogTileLocation;
+                //helper.Events.GameLoop.OneSecondUpdateTicked += this.LogTileLocation;
             #endif
 
             i18n = helper.Translation;
@@ -52,6 +53,7 @@ namespace LateNites
             carpentersShopCounterTiles = new List<Vector2>();
             fishShopShopCounterTiles = new List<Vector2>();
             museumCounterTiles = new List<Vector2>();
+            blacksmithCounterTiles = new List<Vector2>();
 
             npcRefs = new Dictionary<string, NPC>();
             setupFinished = false;
@@ -72,6 +74,9 @@ namespace LateNites
             museumCounterTiles.Add(new Vector2(3f, 10f));
             museumCounterTiles.Add(new Vector2(3f, 9f));
 
+            blacksmithCounterTiles.Add(new Vector2(3f, 15f));
+            blacksmithCounterTiles.Add(new Vector2(4f, 15f));
+
             // setup special case doors
             InitializeDoorLocations();
 
@@ -84,6 +89,7 @@ namespace LateNites
                     case "Marnie":
                     case "Willy":
                     case "Gunther":
+                    case "Clint":
                         npcRefs[npc.Name] = npc;
                         break;
                 }
@@ -149,12 +155,7 @@ namespace LateNites
 
         private bool IsDoorButton(SButton value)
         {
-            if (value.IsActionButton() || value == SButton.MouseRight)
-            {
-                return true;
-            }
-
-            return false;
+            return (value.IsActionButton() || value == SButton.MouseRight) ? true : false;
         }
 
         // log the current tile location each game tick for debugging purposes
@@ -284,7 +285,49 @@ namespace LateNites
                         );
                         break;
                     case "ArchaeologyHouse":
-                        Monitor.Log($"Museum support is currently being implemented", LogLevel.Info);
+                        // does Gunther ever move from his post? b/c it's hard to test the self-service since he doesn't move
+                        /*
+                            Game1.player.currentLocation.createQuestionDialogue(i18n.Get("ArchaeologyHouse_Menu"),
+                            new Response[3]
+                            {
+                                new Response("Donate", Game1.content.LoadString("Strings\\Locations:ArchaeologyHouse_Menu_Donate")),
+                                new Response("Collect Rewards", Game1.content.LoadString("Strings\\Locations:ArchaeologyHouse_Menu_CollectRewards")),
+                                new Response("Leave", Game1.content.LoadString("Strings\\Locations:ArchaeologyHouse_Menu_Leave"))
+                            },
+                            "Gunther"
+                        );
+                        */
+                        break;
+                    case "Blacksmith":
+                        if (Game1.player.toolBeingUpgraded.Value == null)
+                        {
+                            Response[] answerChoices;
+                            if (IsGeodeInInventory())
+                            {
+                                answerChoices = new Response[4]
+                                {
+                                new Response("Shop", Game1.content.LoadString("Strings\\Locations:Blacksmith_Clint_Shop")),
+                                new Response("Upgrade", Game1.content.LoadString("Strings\\Locations:Blacksmith_Clint_Upgrade")),
+                                new Response("Process", Game1.content.LoadString("Strings\\Locations:Blacksmith_Clint_Geodes")),
+                                new Response("Leave", Game1.content.LoadString("Strings\\Locations:Blacksmith_Clint_Leave"))
+                                };
+                            }
+                            else
+                            {
+                                answerChoices = new Response[3]
+                                {
+                                new Response("Shop", Game1.content.LoadString("Strings\\Locations:Blacksmith_Clint_Shop")),
+                                new Response("Upgrade", Game1.content.LoadString("Strings\\Locations:Blacksmith_Clint_Upgrade")),
+                                new Response("Leave", Game1.content.LoadString("Strings\\Locations:Blacksmith_Clint_Leave"))
+                                };
+                            }
+                            Game1.currentLocation.createQuestionDialogue("", answerChoices, "Blacksmith");
+                        }
+                        else
+                        {
+                            GiveToolIfDone();
+                        }
+
                         break;
                     default:
                         Monitor.Log($"invalid location: {locationString}", LogLevel.Info);
@@ -294,6 +337,42 @@ namespace LateNites
 
             return result;
 
+        }
+
+        // checks if the player has a geode in their inventory, returns true if they do
+        private bool IsGeodeInInventory()
+        {
+            return (Game1.player.hasItemInInventory(535, 1) 
+                || Game1.player.hasItemInInventory(536, 1) 
+                || Game1.player.hasItemInInventory(537, 1) 
+                || Game1.player.hasItemInInventory(749, 1));
+        }
+
+        // gives player upgraded tool if Clint has finished it, returns true on success
+        private bool GiveToolIfDone()
+        {
+            NPC clint = npcRefs["Clint"];
+
+            if (Game1.player.daysLeftForToolUpgrade.Value <= 0)
+            {
+                if (Game1.player.freeSpotsInInventory() > 0)
+                {
+                    // inventory has space, give player upgraded tool
+                    Game1.player.holdUpItemThenMessage(Game1.player.toolBeingUpgraded.Value);
+                    Game1.player.addItemToInventoryBool(Game1.player.toolBeingUpgraded.Value);
+                    Game1.player.toolBeingUpgraded.Value = null;
+                    return true;
+                }
+
+                // no space to put tool, so return false
+                Game1.drawDialogue(clint, Game1.content.LoadString("Data\\ExtraDialogue:Clint_NoInventorySpace"));
+                return false;
+            }
+
+            // NPC Clint is still working on tool
+            Game1.drawDialogue(clint, Game1.content.LoadString("Data\\ExtraDialogue:Clint_StillWorking", 
+                Game1.player.toolBeingUpgraded.Value.DisplayName));
+            return false;
         }
 
         private bool ShouldOpen(bool isActionKey, int facingDirection, String locationString, Vector2 playerLocation)
@@ -318,6 +397,9 @@ namespace LateNites
                         break;
                     case "ArchaeologyHouse":
                         result = this.museumCounterTiles.Contains(playerLocation) && (npcRefs["Gunther"].currentLocation.Name != locationString || !npcRefs["Gunther"].getTileLocation().Equals(new Vector2()));
+                        break;
+                    case "Blacksmith":
+                        result = this.blacksmithCounterTiles.Contains(playerLocation) && (npcRefs["Clint"].currentLocation.Name != locationString || !npcRefs["Clint"].getTileLocation().Equals(new Vector2(3f, 13f)));
                         break;
                     default:
                         break;
