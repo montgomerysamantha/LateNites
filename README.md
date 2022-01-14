@@ -7,12 +7,12 @@ Ever wish there was a self-checkout at Pierre's avaliable after dark or at the c
 is the Stardew mod for you!
 Now you can buy stuff without someone at the counter and extend store hours to 6:00 AM to 2:00 AM!
 
+    Blacksmith Clint's shop
     Carpenter Robin's shop
     Marnie's animal shop
     Gunther's Museum
     Pierre's shop
     Willy's fish shop
-
 
 ## Credits
 
@@ -46,7 +46,10 @@ The game handles time using an extended 24 hour clock (ex: 6:00AM is 600, midnig
 In the future, I would like to add support for Stardew Valley Expanded shops and potentially create a seperate "Unlock Everything" mod as well, since it's
 hard to chat with the townsfolk after 8:00 PM. 
 
-Potential Future Features:
+## Potential Future Features:
+- Add an "away" message for Clint
+- Joja Mart support
+- Stardew Valley Expanded Edition support
 - Config file for buildings to be locked/unlocked
 - Unlock ALL doors, regardless of heart levels
 - Keep doors unlocked on special event days (Flower dance, Halloween, Winter Festival, and others)
@@ -54,8 +57,13 @@ Potential Future Features:
 ## Recent Updates
 - Museum now unlocks at 6:00AM, can donate artifacts and collect rewards as needed
 - Willy's shop now opens at 6:00AM
+- Blacksmith support added
 - Right clicking on door now works to open it
 
-## Bugs
+## Known Issues
+- Gunther does not move, ever, from what I can tell. So it's hard to test if the self-serve is working. I might have to download a Gunther mod to get this 
+fully working and tested.
+- I need a few more French and Korean translations for the Museum and Blacksmith.
 
+## Bugs
 Feel free to report bugs, feature requests, in the issues category on GitHub. I will try to keep this mod maintained with later versions of SMAPI but can't make any promises. :)
