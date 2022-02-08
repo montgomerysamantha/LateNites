@@ -57,11 +57,11 @@ hard to chat with the townsfolk after 8:00 PM.
 - Keep doors unlocked on special event days (Flower dance, Halloween, Winter Festival, and others)
 <details>
   <summary>Spoiler warning!</summary>
-    Add support for late game locations like:
-    ```
-    - Sandy's shop
-    - Ginger Island
-    ```
+
+Add support for late game locations like:
+- Sandy's shop
+- Ginger Island
+
 </details>
 
 ## Recent Updates
