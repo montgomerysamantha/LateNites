@@ -1,6 +1,8 @@
 # Late Nites - A Stardew Valley mod
 
-![Late Nites](/media/latenites.png)
+<p align="center">
+  <img src="https://github.com/montgomerysamantha/LateNites/blob/main/media/latenites.png?raw=true" alt="Late Nites"/>
+</p>
 
 ![Passing out a 2:00 AM](/media/two_am.gif)
 
