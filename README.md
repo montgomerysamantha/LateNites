@@ -35,9 +35,14 @@ Avaliable in English, French, and Korean currently (please contact me if you wan
 I created this mod as a tool for myself since I often was frustrated by stores closing early and Marnie always seems to be gone from her shop. :(
 With this, she can go hang out with Mayor Lewis all the time lol.
 
+![Marnie's Shop](/media/marnies.gif)
+
 Now all of the shops are essentially like your local 7/11 and open all the time, or as close as I could make it.
+
 I extended the hours from 6:00 AM to 2:00 AM, and I hope to add more late-game locations soon.
 The game handles time using an extended 24 hour clock (ex: 6:00AM is 600, midnight is 2400, 2:00AM is 2600 for those that need it :D)
+
+![Robin's Shop](/media/robins.gif)
 
 In the future, I would like to add support for Stardew Valley Expanded shops and potentially create a seperate "Unlock Everything" mod as well, since it's
 hard to chat with the townsfolk after 8:00 PM.
@@ -45,20 +50,33 @@ hard to chat with the townsfolk after 8:00 PM.
 ## Potential Future Features:
 - Add an "away" message for Clint
 - Joja Mart support
+- Traveling Cart support
 - Stardew Valley Expanded Edition support
 - Config file for buildings to be locked/unlocked
 - Unlock ALL doors, regardless of heart levels
 - Keep doors unlocked on special event days (Flower dance, Halloween, Winter Festival, and others)
+<details>
+  <summary>Spoiler warning!</summary>
+    Add support for late game locations like:
+    - Sandy's shop
+    - Ginger Island
+</details>
 
 ## Recent Updates
-- Museum now unlocks at 6:00AM, can donate artifacts and collect rewards as needed
-- Willy's shop now opens at 6:00AM
+- Museum now unlocks at 6:00 AM, can donate artifacts and collect rewards as needed
 - Blacksmith support added
 - Right clicking on door now works to open it
 
 ## Known Issues
 - Gunther does not move, ever, from what I can tell. So it's hard to test if the self-serve is working. I might have to download a Gunther mod to get this
 fully working and tested.
+- Willy's shop is only open from 8:00 AM to 2:00 AM
+<details>
+  <summary>Spoiler warning!</summary>
+
+  I think this is a late game problem. Once you unlock the island, WIlly changes his hours to 8:00 AM for boat rides. This is probably what caused the change.
+
+</details>
 - I need a few more French and Korean translations for the Museum and Blacksmith.
 - Clint's trash can upgrades are buggy, see issues for more info
 
