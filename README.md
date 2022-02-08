@@ -58,8 +58,10 @@ hard to chat with the townsfolk after 8:00 PM.
 <details>
   <summary>Spoiler warning!</summary>
     Add support for late game locations like:
+    ```
     - Sandy's shop
     - Ginger Island
+    ```
 </details>
 
 ## Recent Updates
